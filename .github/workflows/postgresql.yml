@@ -1,0 +1,22 @@
+# .github/workflows/postgresql.yml
+
+name: PostgreSQL Docker Container
+
+on:
+  push:
+    branches:
+      - master
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v2
+
+      - name: Build Docker image
+        run: docker build -t my_postgresql .
+
+      - name: Run PostgreSQL container
+        run: docker run --name my_postgresql_container -d -p 5432:5432 my_postgresql
